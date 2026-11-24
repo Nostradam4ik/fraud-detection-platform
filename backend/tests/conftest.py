@@ -6,8 +6,17 @@ Copyright (c) 2024-2026 Andrii Zhmuryk. Released under the MIT License (see LICE
 """
 
 import os
+import tempfile
+
 # Set testing environment before importing app
 os.environ["TESTING"] = "true"
+# The app reads DATABASE_URL when it is imported. Unless one is provided (the CI
+# integration job runs these tests against PostgreSQL), point it at a throwaway
+# SQLite file so tests that go through the real engine never depend on a database
+# left over from an earlier run, and never touch the developer's own one.
+if "DATABASE_URL" not in os.environ:
+    _TEST_DB_DIR = tempfile.mkdtemp(prefix="fraud-tests-")
+    os.environ["DATABASE_URL"] = f"sqlite:///{_TEST_DB_DIR}/test.db".replace("\\", "/")
 
 import pytest
 from fastapi.testclient import TestClient
@@ -18,6 +27,53 @@ from sqlalchemy.pool import StaticPool
 from app.main import app
 from app.db.database import Base, get_db
 from app.db.models import User, Prediction
+
+
+@pytest.fixture(scope="session", autouse=True)
+def app_database():
+    """Create the tables in the app's own (temporary) database once per session."""
+    from app.db.database import init_db
+
+    init_db()
+    yield
+
+
+@pytest.fixture(scope="session", autouse=True)
+def fraud_model_loaded(tmp_path_factory):
+    """Load a small model trained on synthetic data when no trained model exists.
+
+    The real model is trained on the Kaggle dataset, which is not in the repository,
+    so the model endpoints would answer 503 in a clean checkout. This trains a tiny
+    forest on the project's own synthetic generator, which is enough to exercise the
+    endpoints, and leaves a real model alone when one is present.
+    """
+    from pathlib import Path
+
+    import joblib
+    from sklearn.ensemble import RandomForestClassifier
+    from sklearn.preprocessing import StandardScaler
+
+    from app.core.config import settings
+    from app.models.ml_model import fraud_model
+    from ml.generate_sample_data import generate_synthetic_data
+
+    backend_dir = Path(__file__).resolve().parent.parent
+    if (backend_dir / settings.model_path).exists() and (backend_dir / settings.scaler_path).exists():
+        yield
+        return
+
+    df = generate_synthetic_data(n_samples=3000, fraud_ratio=0.02)
+    features, labels = df.drop(columns="Class"), df["Class"]
+    scaler = StandardScaler().fit(features)
+    model = RandomForestClassifier(
+        n_estimators=25, max_depth=8, random_state=42, class_weight="balanced"
+    ).fit(scaler.transform(features), labels)
+
+    out = tmp_path_factory.mktemp("model")
+    joblib.dump(model, out / "fraud_detector.pkl")
+    joblib.dump(scaler, out / "scaler.pkl")
+    assert fraud_model.load(str(out / "fraud_detector.pkl"), str(out / "scaler.pkl"))
+    yield
 
 
 # Create in-memory SQLite database for testing
