@@ -4,7 +4,7 @@ Security Headers Middleware
 Implements security headers including CSP, HSTS, X-Frame-Options, etc.
 
 Author: Zhmuryk Andrii
-Copyright (c) 2024 - All Rights Reserved
+Copyright (c) 2024-2026 Andrii Zhmuryk. Released under the MIT License (see LICENSE)
 """
 
 from fastapi import Request

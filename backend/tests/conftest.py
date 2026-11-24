@@ -2,7 +2,7 @@
 Pytest Configuration and Fixtures
 
 Author: Zhmuryk Andrii
-Copyright (c) 2024 - All Rights Reserved
+Copyright (c) 2024-2026 Andrii Zhmuryk. Released under the MIT License (see LICENSE)
 """
 
 import os

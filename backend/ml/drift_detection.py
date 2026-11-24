@@ -3,7 +3,7 @@ ML Model Drift Detection
 Monitors model performance and data distribution for drift
 
 Author: Zhmuryk Andrii
-Copyright (c) 2024 - All Rights Reserved
+Copyright (c) 2024-2026 Andrii Zhmuryk. Released under the MIT License (see LICENSE)
 """
 
 import logging

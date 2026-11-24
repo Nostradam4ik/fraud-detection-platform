@@ -2,7 +2,7 @@
 # Terraform configuration for production deployment
 #
 # Author: Zhmuryk Andrii
-# Copyright (c) 2024 - All Rights Reserved
+# Copyright (c) 2024-2026 Andrii Zhmuryk. Released under the MIT License (see LICENSE)
 
 terraform {
   required_version = ">= 1.5.0"

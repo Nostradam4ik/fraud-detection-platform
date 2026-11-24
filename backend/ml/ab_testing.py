@@ -3,7 +3,7 @@ A/B Testing Framework for ML Models
 Compare model performance in production with controlled traffic splitting
 
 Author: Zhmuryk Andrii
-Copyright (c) 2024 - All Rights Reserved
+Copyright (c) 2024-2026 Andrii Zhmuryk. Released under the MIT License (see LICENSE)
 """
 
 import hashlib

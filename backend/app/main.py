@@ -6,7 +6,7 @@ Built with FastAPI, scikit-learn, and modern Python best practices.
 
 Author: Zhmuryk Andrii
 LinkedIn: https://www.linkedin.com/in/andrii-zhmuryk-5a3a972b4/
-Copyright (c) 2024 - All Rights Reserved
+Copyright (c) 2024-2026 Andrii Zhmuryk. Released under the MIT License (see LICENSE)
 """
 
 import logging
@@ -102,7 +102,7 @@ dataset from Kaggle with 284,807 transactions.
 ### Author
 **Zhmuryk Andrii** - [LinkedIn](https://www.linkedin.com/in/andrii-zhmuryk-5a3a972b4/)
 
-Copyright (c) 2024 - All Rights Reserved
+Copyright (c) 2024-2026 Andrii Zhmuryk. Released under the MIT License (see LICENSE)
     """,
     version=settings.app_version,
     docs_url="/docs",

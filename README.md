@@ -6,7 +6,7 @@
 [![React](https://img.shields.io/badge/React-18-61DAFB.svg)](https://reactjs.org)
 [![PWA Ready](https://img.shields.io/badge/PWA-Ready-5A0FC8.svg)](https://web.dev/progressive-web-apps/)
 [![i18n](https://img.shields.io/badge/i18n-EN%20%7C%20FR%20%7C%20UA-green.svg)](#internationalization)
-[![License](https://img.shields.io/badge/License-All%20Rights%20Reserved-red.svg)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 A **machine learning-powered fraud detection system** for credit card transactions. Built with FastAPI, scikit-learn, and React. Features a Progressive Web App (PWA) with multi-language support and mobile-first design.
 
@@ -544,11 +544,7 @@ docker-compose -f docker-compose.prod.yml up -d
 
 ## License
 
-**All Rights Reserved** - Copyright (c) 2024-2025 Zhmuryk Andrii
-
-This project is protected by copyright. You may view this code for educational and reference purposes only. Any copying, modification, distribution, or commercial use is strictly prohibited without prior written permission from the author.
-
-See the [LICENSE](LICENSE) file for full details.
+Released under the [MIT license](LICENSE). Copyright (c) 2026 Andrii Zhmuryk.
 
 ## Contact
 

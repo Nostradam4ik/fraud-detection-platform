@@ -2,7 +2,7 @@
 Prediction Service - Save and retrieve predictions from database
 
 Author: Zhmuryk Andrii
-Copyright (c) 2024 - All Rights Reserved
+Copyright (c) 2024-2026 Andrii Zhmuryk. Released under the MIT License (see LICENSE)
 """
 
 import json
